@@ -19,6 +19,23 @@ services:
     networks:
       - private-network
 
+  account:
+    build:
+      context: ../polite-transaction-account-resource/
+      dockerfile: Dockerfile
+    image: polite-transaction-account:latest
+    environment:
+      - spring.datasource.url=jdbc:postgresql://store-db-store:5432/store
+      - spring.datasource.username=store
+      - spring.datasource.password=store
+    deploy:
+      mode: replicated
+      replicas: 1
+    restart: always
+    networks:
+      - private-network
+    depends_on:
+      - db-store
 networks:
   private-network:
     driver: bridge
