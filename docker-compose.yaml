@@ -1,4 +1,3 @@
-# docker compose up -d --build --force-recreate
 version: '3.8'
 name: store
 
@@ -23,7 +22,10 @@ services:
     build:
       context: ../polite-transaction-account-resource/
       dockerfile: Dockerfile
-    image: polite-transaction-account:latest
+    container_name: store-account
+    image: store-account:latest
+    ports:
+      - 8080:8080
     environment:
       - spring.datasource.url=jdbc:postgresql://store-db-store:5432/store
       - spring.datasource.username=store
@@ -36,6 +38,7 @@ services:
       - private-network
     depends_on:
       - db-store
+
 networks:
   private-network:
     driver: bridge
