@@ -46,6 +46,7 @@ services:
       - spring.datasource.url=jdbc:postgresql://store-db-store:5432/store
       - spring.datasource.username=store
       - spring.datasource.password=store
+      - eureka.client.service-url.defaultZone=http://store-discovery:8761/eureka
     deploy:
       mode: replicated
       replicas: 1
