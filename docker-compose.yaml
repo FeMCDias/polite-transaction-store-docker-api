@@ -38,10 +38,10 @@ services:
     build:
       context: ../polite-transaction-account-resource/
       dockerfile: Dockerfile
-    container_name: store-account
+    # container_name: store-account
     image: store-account:latest
-    ports:
-      - 8080:8080
+    # ports:
+    #   - 8080:8080 (Discover does this for us)
     environment:
       - spring.datasource.url=jdbc:postgresql://store-db-store:5432/store
       - spring.datasource.username=store
@@ -64,7 +64,7 @@ services:
     container_name: store-auth
     image: store-auth:latest
     ports:
-      - 8081:8080
+      - 8080:8080
     environment:
       - eureka.client.service-url.defaultZone=http://store-discovery:8761/eureka
     deploy:
